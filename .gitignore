@@ -10,4 +10,8 @@ build
 # Ignore VS Code Configurations
 .vscode
 
+# Ignore bin directory
+bin
+
+#Ignore Serenity Report directory
 target
