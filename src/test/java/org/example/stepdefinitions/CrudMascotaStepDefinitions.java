@@ -53,7 +53,7 @@ public class CrudMascotaStepDefinitions {
 
     @And("realiza una nueva consulta al sistema con el id {string} de la mascota creada")
     public void realizaConsultaMascotaCreada(String idMascota) {
-        actor.attemptsTo(ConsultarMascota.consultarMascota(Long.parseLong(idMascota)));
+        actor.attemptsTo(ConsultarMascota.porId(Long.parseLong(idMascota)));
     }
 
     @Then("el usuario comprueba que la mascota {string} ha sido creada en el sistema")
@@ -79,7 +79,7 @@ public class CrudMascotaStepDefinitions {
 
     @And("realiza una nueva consulta al sistema con el id {string} de la mascota modificada")
     public void realizaConsultaMascotaModificada(String idMascota) {
-        actor.attemptsTo(ConsultarMascota.consultarMascota(Long.parseLong(idMascota)));
+        actor.attemptsTo(ConsultarMascota.porId(Long.parseLong(idMascota)));
     }
 
     @Then("el usuario comprueba que la mascota ha sido modificada con el nombre {string} correctamente en el sistema")
@@ -92,12 +92,12 @@ public class CrudMascotaStepDefinitions {
 
     @When("el usuario elimina el registro de la mascota con id {string} del sistema")
     public void elUsuarioEliminaElRegistroDeLaMascota(String idMascota) {
-        actor.attemptsTo(EliminarMascota.eliminarMascota(Long.parseLong(idMascota), Constantes.API_KEY));
+        actor.attemptsTo(EliminarMascota.porId(Long.parseLong(idMascota), Constantes.API_KEY));
     }
 
     @And("realiza una nueva consulta al sistema con el id {string} de la mascota eliminada")
     public void realizaConsultaMascotaEliminada(String idMascota) {
-        actor.attemptsTo(ConsultarMascota.consultarMascota(Long.parseLong(idMascota)));
+        actor.attemptsTo(ConsultarMascota.porId(Long.parseLong(idMascota)));
     }
 
     @Then("el sistema devuelve una respuesta 404 debido a que el registro ha sido eliminado correctamente")

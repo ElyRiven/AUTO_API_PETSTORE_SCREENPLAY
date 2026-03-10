@@ -16,7 +16,7 @@ public class EliminarMascota implements Task {
         this.apiKey = apiKey;
     }
 
-    public static Performable eliminarMascota(long idMascota, String apiKey) {
+    public static Performable porId(long idMascota, String apiKey) {
         return new EliminarMascota(idMascota, apiKey);
     }
 

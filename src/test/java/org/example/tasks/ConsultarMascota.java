@@ -14,7 +14,7 @@ public class ConsultarMascota implements Task {
         this.idMascota = idMascota;
     }
 
-    public static Performable consultarMascota(long idMascota) {
+    public static Performable porId(long idMascota) {
         return new ConsultarMascota(idMascota);
     }
 
