@@ -1,44 +1,40 @@
-#### US-001 — Registro de Usuario con Correo y Contraseña
+#### US-001 — Registro, Consulta, Modificación y Eliminación de una Mascota
 
 **Descripción:**
 
-> Como **Invitado**,
-> quiero **crear una cuenta usando mi nombre completo, correo electrónico, contraseña y confirmación de contraseña**,
-> para **poder acceder a la Budget Management App con mi propio espacio personal.**
+> Como **Usuario**,
+> quiero **registrar, consultar, modificar y eliminar una mascota a través de la API REST pública de PetStore**,
+> para **verificar que el ciclo de vida completo de un recurso funciona correctamente mediante los verbos HTTP POST, GET, PUT y DELETE.**
 
 **Validación INVEST:**
 
 | Principio | ✅ |
 |---|---|
-| Independiente | El flujo de registro es autónomo y no depende de otras historias. |
-| Negociable | Los requisitos de campos están definidos por el esquema Zod y pueden ajustarse. |
-| Valioso | Permite a nuevos usuarios acceder al sistema. |
-| Estimable | Formulario pequeño y llamada de registro a Firebase claramente delimitada. |
-| Pequeño | Una sola página de formulario; acotado al flujo de registro. |
-| Comprobable | Cubierto por `RegisterForm.test.tsx` y `RegisterForm.integration.test.tsx`. |
+| Independiente | El flujo de gestión de mascota es autónomo y no depende de otras historias. |
+| Negociable | Los datos de la mascota (nombre, estado, categoría) pueden ajustarse según el contrato de la API. |
+| Valioso | Verifica el ciclo de vida completo de un recurso en la API REST de PetStore. |
+| Estimable | Cuatro llamadas HTTP claramente delimitadas: POST, GET, PUT, DELETE. |
+| Pequeño | Un único escenario que cubre las operaciones CRUD sobre el recurso mascota. |
+| Comprobable | Cubierto por `gestion_mascota.feature` usando Serenity BDD con el patrón Screenplay. |
 
 **Criterios de Aceptación (Gherkin):**
 
 ```gherkin
-Funcionalidad: Registro de Usuario
+Funcionalidad: Registro, Actualización, Comprobación y Eliminación de una Mascota
 
-  Escenario: Registro exitoso con credenciales válidas
-    Dado que el usuario está en la página de registro (/register)
-    Cuando el usuario ingresa su nombre completo
-    Y ingresa su correo electrónico
-    Y ingresa una contraseña
-    Y ingresa la confirmación de su contraseña
-    Y hace clic en el botón "Crear Cuenta"
-    Entonces la cuenta se crea a través de Firebase Authentication
-    Y el usuario es redirigido al dashboard (/dashboard)
-
-  Escenario: Registro falla cuando el correo ya está registrado
-    Dado que el usuario ingresa un correo ya registrado en el sistema
-    Cuando hace clic en "Crear Cuenta"
-    Entonces se muestra un mensaje de error en la parte superior del formulario
-    Y el usuario permanece en la página de registro
+  Escenario: Ciclo de vida completo de una mascota en la API PetStore
+    Dado que el usuario se prepara para gestionar mascotas en la API PetStore
+    Cuando el usuario registra una nueva mascota con id, categoría, nombre y etiqueta 
+    Y realiza una nueva consulta al sistema con el id de la mascota creada
+    Entonces el usuario comprueba que la mascota ha sido creada en el sistema
+    Cuando el usuario modifica la mascota con un id, actualizando la categoría, el nombre y la etiqueta
+    Y realiza una nueva consulta al sistema con el id de la mascota modificada
+    Entonces el usuario comprueba que la mascota ha sido modificada correctamente en el sistema
+    Cuando el usuario elimina el registro de la mascota con un id del sistema
+    Y realiza una nueva consulta al sistema con el id de la mascota eliminada
+    Entonces el sistema devuelve una respuesta 404 debido a que el registro ha sido eliminado correctamente
 ```
 
-**Actor(es):** Invitado  
-**Componentes Relacionados:** `RegisterForm.tsx`, `RegisterPage.tsx`, `authService.ts`, `authRepository` (Firebase), `registerSchema.ts`  
-**Dependencias:** Proyecto de Firebase Authentication configurado y accesible.
+**Actor(es):** Usuario  
+**Componentes Relacionados:** `gestion_mascota.feature`, `Constantes.java`, `PasosGestionMascota.java`, `TareasGestionMascota.java`, `EjecutorGestionMascota.java`  
+**Dependencias:** API REST pública PetStore disponible en `https://petstore.swagger.io/v2`, dependencia `serenity-rest-assured` configurada en `build.gradle`.
