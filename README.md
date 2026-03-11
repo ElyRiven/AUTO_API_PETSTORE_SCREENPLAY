@@ -6,6 +6,15 @@ Este proyecto implementa la automatización de pruebas E2E sobre la [**API públ
 
 ---
 
+## Stack Tecnológico
+
+| Herramienta | Versión mínima requerida | Notas                                                                                                                                                                                                                                                    |
+| ----------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Java        | 17                       | El proyecto está compilado con `sourceCompatibility = 17`. Se requiere **Java 17 o superior** para su ejecución.                                                                                                                                         |
+| Gradle      | 7.6                      | El proyecto fue generado y probado con **Gradle 9.4.0**. El plugin de Serenity BDD 4.x requiere como mínimo Gradle 7.6; versiones anteriores no son compatibles. Se recomienda usar **Gradle 9.4.0 o superior** para garantizar compatibilidad completa. |
+
+---
+
 ## Estructura del proyecto
 
 ```
@@ -68,6 +77,12 @@ Para ejecutar las pruebas, basta con correr el siguiente comando en la raíz del
 
 ```bash
 gradle clean test
+```
+
+O
+
+```bash
+./gradlew clean test
 ```
 
 Este comando limpia compilaciones anteriores, ejecuta todos los escenarios definidos en `src/test/resources/features/` y genera automáticamente los reportes de Serenity al finalizar.
